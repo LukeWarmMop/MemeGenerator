@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+    <script>
+        function updateTextInputs() {
+            const templateSelect = document.getElementById('template');
+            const boxCount = templateSelect.options[templateSelect.selectedIndex].dataset.boxCount;
+            const textInputsContainer = document.getElementById('text-inputs');
+            const boxCountInput = document.getElementById('box_count');
+
+            textInputsContainer.innerHTML = '';
+            boxCountInput.value = boxCount;
+
+            for (let i = 0; i < boxCount; i++) {
+                textInputsContainer.innerHTML += `
+                        <label for="text${i}">Text ${i + 1}:</label>
+                        <input type="text" name="text${i}" id="text${i}">
+                    `;
+            }
+        }
+
+        window.onload = function () {
+            updateTextInputs();
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Meme Generator</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="template">Choose a meme template:</label>
+                <select name="template_id" id="template" onchange="updateTextInputs()">
+                    {% for template in templates %}
+                    <option value="{{ template.id }}" data-box-count="{{ template.box_count }}">{{ template.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="hidden" name="box_count" id="box_count" value="0">
+            <div id="text-inputs" class="form-group"></div>
+            <input type="submit" value="Generate Meme">
+        </form>
+        {% if meme_url %}
+        <h2>Generated Meme:</h2>
+        <img src="{{ meme_url }}" alt="Generated Meme">
+        {% endif %}
+    </div>
+</body>
+</html>
