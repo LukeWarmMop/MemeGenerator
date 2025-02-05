@@ -1,64 +1,105 @@
 ﻿body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ecf0f1;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
+    margin: 0;
 }
 
-.container {
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 80%;
-    max-width: 500px;
+h3 {
     text-align: center;
-}
-
-h1 {
-    color: #007bff;
-}
-
-form {
+    color: #34495e;
+    font-size: 1.8em;
     margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    margin: 10px 0 5px;
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: #2c3e50;
 }
 
-select, input[type="text"], input[type="submit"] {
-    width: calc(100% - 20px); 
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-}
-
-input[type="submit"] {
-    background-color: #007bff;
+button, .button-link {
+    background-color: #2980b9;
     color: white;
+    padding: 12px;
     border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
 }
 
-    input[type="submit"]:hover {
-        background-color: #0056b3;
-        cursor: pointer;
+    button:hover, .button-link:hover {
+        background-color: #3498db;
     }
 
-img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-top: 20px;
+.flashes {
+    list-style-type: none;
+    padding: 0;
+    color: #e74c3c;
+    margin-bottom: 20px;
 }
+
+.table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+    .table td, .table th {
+        border: 1px solid #ddd;
+        padding: 12px;
+        font-size: 1em;
+        color: #2c3e50;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table th {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        text-align: left;
+        background-color: #2980b9;
+        color: white;
+        font-size: 1em;
+    }
+
+.home-link {
+    display: block;
+    margin-top: 20px;
+    color: #2980b9;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+    .home-link:hover {
+        text-decoration: underline;
+        color: #3498db;
+    }

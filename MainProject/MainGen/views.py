@@ -3,13 +3,13 @@ from flask import render_template, request
 import requests
 import keyring
 
-def get_imgflip_credentials():
+def get_user_pass():
     return (
         keyring.get_password("imgflip", "username"),
         keyring.get_password("imgflip", "password")
     )
 
-def fetch_templates():
+def meme_templates():
     try:
         response = requests.get('https://api.imgflip.com/get_memes')
         response.raise_for_status()
@@ -20,9 +20,9 @@ def fetch_templates():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    username, password = get_imgflip_credentials()
+    username, password = get_user_pass()
     meme_url = None
-    templates = fetch_templates()
+    templates = meme_templates()
 
     if request.method == 'POST':
         template_id = request.form['template_id']
@@ -32,15 +32,15 @@ def index():
             box_count = selected_template['box_count']
             texts = [request.form.get(f'text{i}', '') for i in range(box_count)]
 
-            payload = {
+            meme_data = {
                 'template_id': template_id,
                 'username': username,
                 'password': password
             }
-            payload.update({f'boxes[{i}][text]': texts[i] for i in range(box_count)})
+            meme_data.update({f'boxes[{x}][text]': texts[x] for x in range(box_count)})
 
             try:
-                response = requests.post('https://api.imgflip.com/caption_image', data=payload)
+                response = requests.post('https://api.imgflip.com/caption_image', data=meme_data)
                 response.raise_for_status()
                 data = response.json()
                 if data.get('success'):
